@@ -1,0 +1,34 @@
+steps:
+  - id: 'tf init'
+    name: 'hashicorp/terraform:1.0.0'
+    entrypoint: sh
+    dir: '1_task_cf/terraform'
+    args:
+      - '-c'
+      - 'terraform init'
+
+  - id: 'tf plan'
+    name: 'hashicorp/terraform:1.0.0'
+    entrypoint: sh
+    dir: '1_task_cf/terraform'
+    args:
+      - '-c'
+      - 'terraform plan -lock=false'
+
+  - id: 'tf apply'
+    name: 'hashicorp/terraform:1.0.0'
+    entrypoint: sh
+    dir: '1_task_cf/terraform'
+    args:
+      - '-c'
+      - 'terraform apply -auto-approve'
+
+  - name: gcr.io/cloud-builders/gcloud
+    args:
+      - functions
+      - deploy
+      - main
+      - --source=.
+      - --trigger-http
+      - --runtime=python310
+      - --allow-unauthenticated
