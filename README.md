@@ -26,7 +26,19 @@ Create terraform file to deploy cloud function from task-cf folder and BigQuery 
 Update CF to publish messages into PubSub topic. PubSub topic should be deployed by terraform.
 
 #### Content:
-- TBD
+- Folder *function*:
+  - Files:
+    - *main.py*
+    - *requirements.txt*
+- Folder *schemas*:
+  - File *task-cf.json*
+- Archive *function*
+    - Files:
+      - *main.py*
+      - *requiements.txt*
+- Files:
+  - *cloudbuild.yaml*
+  - *main.tf*
 
 ### 3_task_df
 #### Description:
