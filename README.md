@@ -46,7 +46,25 @@ Create a dataflow job to read messages from pubsub, parse them and store to BigQ
 
 
 #### Content:
-- TBD
+- Folder *df_job*:
+  - Files:
+    - *main.py*
+    - *setup.py*
+- Folder *function*:
+  - Files:
+    - *main.py*
+    - *requirements.txt*
+- Folder *schemas*:
+  - Files:
+    - *task-cf.json*
+    - *task-df.json*
+    - *task-df-error.json*
+- Folder *terraform*:
+  - Files:
+    - *main.tf*
+    - *variables.tf*
+- Files:
+  - *cloudbuild.yaml*
 
 ### 4_task_af
 #### Description:
