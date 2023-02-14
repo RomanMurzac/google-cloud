@@ -141,25 +141,25 @@ resource "google_pubsub_subscription" "subscription_cf" {
   retain_acked_messages = true
 }
 
-# Define the GitHub trigger
-#resource "google_cloudbuild_trigger" "github_trigger" {
-#  project = var.project_id
-#  name = var.trigger_name
-#  filename = "cloudbuild.yaml"
-#
-#  github {
-#    owner = "romanmurzac"
-#    name = "google-cloud"
-#    push {
-#      branch = "^main"
-#    }
-#  }
-#}
+Define the GitHub trigger
+resource "google_cloudbuild_trigger" "github_trigger" {
+ project = var.project_id
+ name = var.trigger_name
+ filename = "cloudbuild.yaml"
+
+ github {
+   owner = "romanmurzac"
+   name = "google-cloud"
+   push {
+     branch = "^main$"
+   }
+ }
+}
 
 # Define the Dataflow job
 resource "google_dataflow_job" "dataflow_job_df" {
   name = var.dataflow_name
-  template_gcs_path = "gs://bucket-gcp-srp-hw/templates/dataflow-gcp-srp-hw"
+  template_gcs_path = "gs://bucket-gcp-srp-hw/templates/dataflow-job"
   temp_gcs_location = "gs://bucket-gcp-srp-hw/temp_dir"
 
 }
