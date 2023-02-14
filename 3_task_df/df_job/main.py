@@ -4,7 +4,6 @@ from datetime import datetime
 
 import apache_beam as beam
 from apache_beam.options.pipeline_options import PipelineOptions
-from apache_beam.options.pipeline_options import SetupOptions
 
 SCHEMA = ",".join(
     [
@@ -65,6 +64,24 @@ def run(options, input_subscription, output_success_table, output_error_table):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument(
+        '--job_name',
+        required=True,
+        default="dataflow-gcp-srp-hw",
+        help='Dataflow job name.'
+    )
+    parser.add_argument(
+        '--project',
+        required=True,
+        default="project-gcp-srp-hw",
+        help='Project name.'
+    )
+    parser.add_argument(
+        '--region',
+        required=True,
+        default="US",
+        help='Project region.'
+    )
+    parser.add_argument(
         '--input_subscription',
         required=True,
         default="/subscriptions/project-gcp-srp-hw/subscription-gcp-srp-hw",
@@ -82,12 +99,47 @@ if __name__ == '__main__':
         default="project-gcp-srp-hw:df_dataset_gcp_srp_hw.table-gcp-srp-hw-error",
         help='Output BigQuery table for error data.'
     )
-    known_args, pipeline_args = parser.parse_known_args()
-    pipeline_options = PipelineOptions(pipeline_args)
-    pipeline_options.view_as(SetupOptions).save_main_session = True
+    parser.add_argument(
+        '--template_location',
+        required=True,
+        default="gs://project-gcp-srp-hw-bucket-gcp-srp-hw/templates/dataflow-job",
+        help='Templates location.'
+    )
+    parser.add_argument(
+        '--staging_location',
+        required=True,
+        default="gs://project-gcp-srp-hw-bucket-gcp-srp-hw/temp_dir",
+        help='Staging location.'
+    )
+    parser.add_argument(
+        '--temp_location',
+        required=True,
+        default="gs://project-gcp-srp-hw-bucket-gcp-srp-hw/temp_dir",
+        help='Temporary location.'
+    )
+    parser.add_argument(
+        '--runner',
+        required=True,
+        default="DataflowRunner",
+        help='Runner.'
+    )
+    parser.add_argument(
+        '--setup_file',
+        required=True,
+        default="df_job/setup.py",
+        help='Setup file.'
+    )
+
+    args = parser.parse_args()
+    pipeline_options = {'project': args.project, 'runner': args.runner, 'region': args.region,
+                        'staging_location': args.staging_location, 'temp_location': args.temp_location,
+                        'template_location': args.template_location, 'save_main_session': True, 'streaming': True,
+                        'job_name': args.job_name, }
+    pipeline_options = PipelineOptions.from_dictionary(pipeline_options)
+
     run(
         pipeline_options,
-        known_args.input_subscription,
-        known_args.output_success_table,
-        known_args.output_error_table
+        args.input_subscription,
+        args.output_success_table,
+        args.output_error_table
     )
