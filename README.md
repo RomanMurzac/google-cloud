@@ -42,7 +42,8 @@ Update CF to publish messages into PubSub topic. PubSub topic should be deployed
 
 ### 3_task_df
 #### Description:
-TBD
+Create a dataflow job to read messages from pubsub, parse them and store to BigQuery tables. Usual messages should contain 4 fields and should be stored to data table. Error messages should contain 2 fields and should be stored to error table.
+
 
 #### Content:
 - TBD
