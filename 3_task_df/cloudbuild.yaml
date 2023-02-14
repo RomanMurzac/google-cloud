@@ -1,9 +1,9 @@
 steps:
-  - id: "Activate virtual environment venv"
-    name: 'gcr.io/project-gcp-srp-hw/dataflow-python3:latest'
-    entrypoint: '/bin/bash'
-    args: [ '-c', 'source /env/Scripts/activate' ]
-    waitFor: ['-']
+#   - id: "Activate virtual environment venv"
+#     name: 'gcr.io/project-gcp-srp-hw/dataflow-python3:latest'
+#     entrypoint: '/bin/bash'
+#     args: [ '-c', 'source /env/Scripts/activate' ]
+#     waitFor: ['-']
 
   - id: "Create dataflow template"
     name: 'gcr.io/project-gcp-srp-hw/dataflow-python3:latest'
@@ -22,7 +22,7 @@ steps:
          "--setup_file='./function/setup.py'",
          "--autoscaling_algorithm=NONE"
          ]
-    waitFor: [
-      'Activate virtual environment venv'
-      ]
+#     waitFor: [
+#       'Activate virtual environment venv'
+#       ]
     
