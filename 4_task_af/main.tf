@@ -37,9 +37,3 @@ resource "google_bigquery_table" "table_af" {
   deletion_protection = false
   schema = file("schemas/task-af.json")
 }
-
-substitutions = {
-    "_COMPOSER_ENV_NAME": var.composer_name,
-    "_COMPOSER_LOCATION": var.composer_location,
-    "_APP": var.application_name
-}
