@@ -1,5 +1,5 @@
 variable "project_id" {
-  default = "project-gcp-srp-hw"
+  default = "project-work-gcp"
   type = string
   description = "Project ID"
 }
@@ -39,22 +39,4 @@ variable "af_table_id" {
   default = "af-table-gcp-srp-hw"
   type = string
   description = "BigQuery Table ID"
-}
-
-variable "composer_name" {
-  default = "composer-gcp-srp-hw"
-  type = string
-  description = "Airflow Composer name"
-}
-
-variable "composer_location" {
-  default = "us-east4"
-  type = string
-  description = "Airflow composer location"
-}
-
-variable "application_name" {
-  default = "4_task_af"
-  type = string
-  description = "Airflow Task name"
 }
