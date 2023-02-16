@@ -12,7 +12,7 @@ with DAG(
         "af_task_job",
         schedule_interval="0 * * * *",
         default_args={
-            'start_date': datetime(2023, 2, 15),
+            'start_date': datetime(2023, 2, 16),
             **DEFAULT_DAG_ARGS,
         },
 ) as dag:
@@ -20,12 +20,12 @@ with DAG(
     PROJECT_ID = "project-work-gcp"
 
     AF_TASK_INPUT_DATASET_NAME = f"{PROJECT_ID}.df_dataset_gcp_srp_hw"
-    AF_TASK_INPUT_TABLE = f"{AF_TASK_INPUT_DATASET_NAME}.df-table-gcp-srp-hw-success"
+    AF_TASK_INPUT_TABLE = f"{AF_TASK_INPUT_DATASET_NAME}.table-gcp-srp-hw-success"
 
     AF_TASK_OUTPUT_DATASET_NAME = f"{PROJECT_ID}.af_dataset_gcp_srp_hw"
     AF_TASK_OUTPUT_TABLE = f"{AF_TASK_OUTPUT_DATASET_NAME}.af-table-gcp-srp-hw"
 
-    gcs_bucket_name = f"gs://{PROJECT_ID}-af-bucket-gcp-srp-hw/"
+    gcs_bucket_name = f"gs://af-bucket-gcp-srp-hw/"
     gcs_file_name = "af-file-gcp-srp-hw.json"
     gcs_file_full_name = f"{gcs_bucket_name}{gcs_file_name}"
 
