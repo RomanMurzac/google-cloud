@@ -68,7 +68,16 @@ Create a dataflow job to read messages from pubsub, parse them and store to BigQ
 
 ### 4_task_af
 #### Description:
-TBD
+Create an airflow job to read data from BigQuery for last hour and store it into new BQ table and GCS bucket. Airflow job should be running hourly. Create a query to get data from BQ table for last hour and calculate new column base on the data. Query should be put into af_task_query.sql file. Source table for the job should be Dataflow output table. GCS file format should be NEW_LINE_DELIMITED_JSON. Output BQ table and GCS bucket should be deployed by terraform. To finish this task deploy a composer in the GCP project. Composer could be deployed manually from GCP console (without terraform).
+
 
 #### Content:
-- TBD
+- Folder *schemas*:
+  - File *task-af.json*
+- Folder *sql*:
+  - File *af_task_query.sql*
+- Files:
+  - *af_task_dag.py*
+  - *cloudbuild.yaml*
+  - *main.tf*
+  - *variables.tf*
